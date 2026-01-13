@@ -1,8 +1,10 @@
 package com.example.jobtracker.controller;
+import com.example.jobtracker.exception.ResourceNotFoundException;
 import com.example.jobtracker.model.JobApplication;
 import  com.example.jobtracker.service.JobApplicationService;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.ReadOnlyFileSystemException;
 import java.util.List;
 
 /**
@@ -53,7 +55,7 @@ public class JobApplicationController {
      */
     @GetMapping("/{id}")
     public JobApplication getApplicationById(@PathVariable Long id){
-        return service.getJobApplicationById(id).orElseThrow(()-> new RuntimeException("Application Not Found"));
+        return service.getJobApplicationById(id).orElseThrow(()-> new ResourceNotFoundException("Application Not Found"));
     }
 
     /**
